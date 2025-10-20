@@ -163,3 +163,60 @@ for index, fila in cinco_mayores_generos.iterrows():
     comparacion = "más" if peliculas > series else "menos"
 
     print(f"{index + 1}: El género {genero}, que contiene {total} producciones con {peliculas} peliculas y {series} series. Por lo tanto, hay {comparacion} películas que series")
+    
+# 20. Encuentra el título con más caracteres y el título con menos caracteres.
+
+print()
+print()
+netflix["title_length"] = netflix["title"].str.len()
+
+titulo_mas_largo = netflix.loc[netflix["title_length"].idxmax()]
+titulo_mas_corto = netflix.loc[netflix["title_length"].idxmin()]
+
+print("20. Títulos según longitud de caracteres:")
+print(f"Título más largo ({titulo_mas_largo['title_length']} caracteres): {titulo_mas_largo['title']}")
+print(f"Título más corto ({titulo_mas_corto['title_length']} caracteres): {titulo_mas_corto['title']}")
+
+# 21. Verifica si existen títulos repetidos
+
+print()
+print()
+titulos_duplicados = netflix[netflix.duplicated(subset=["title"], keep=False)]
+cantidad_duplicados = titulos_duplicados["title"].nunique()
+
+print(f"21. Existen {cantidad_duplicados} títulos diferentes que están repetidos en el dataset.")
+print("Ejemplos de títulos repetidos:")
+print(titulos_duplicados["title"].value_counts())
+
+# 22. ¿Qué país produce más comedias y dramas?
+
+print()
+print()
+
+# Filtramos por comedias
+
+comedias = netflix[netflix["genres"].str.contains("comedy", case=False, na=False)]
+
+# Filtramos por dramas
+
+dramas = netflix[netflix["genres"].str.contains("drama", case=False, na=False)]
+
+# Función para contar países
+
+def contar_paises(df):
+    paises = df["production_countries"].dropna().str.strip("[]").str.replace(" ", "").str.replace("'", "").str.split(",")
+    contador = Counter(paises.sum())
+    return pd.DataFrame(contador.items(), columns=["country", "quantity"]).sort_values(by="quantity", ascending=False)
+
+# Países con más comedias
+
+paises_comedias = contar_paises(comedias)
+pais_top_comedia = paises_comedias.iloc[0]
+
+# Países con más dramas
+
+paises_dramas = contar_paises(dramas)
+pais_top_drama = paises_dramas.iloc[0]
+
+print(f"22. País con más comedias: {pais_top_comedia['country']} con {pais_top_comedia['quantity']} títulos.")
+print(f"País con más dramas: {pais_top_drama['country']} con {pais_top_drama['quantity']} títulos.")
