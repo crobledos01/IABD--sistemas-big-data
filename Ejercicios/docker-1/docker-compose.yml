@@ -1,0 +1,21 @@
+version: "3"
+services:
+  api:
+    build:
+      context: ./programa
+    ports:
+      - "8000:80"
+    depends_on:
+      - mongo
+    networks:
+      - red_comun
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - red_comun
+volumes:
+  mongo_data:
+networks:
+  red_comun:
