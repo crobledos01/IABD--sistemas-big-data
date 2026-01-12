@@ -1,0 +1,51 @@
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+
+<!-- Baja memoria del ApplicationMaster (por defecto te pide 1536 y tu YARN solo permite 1024) -->
+  <property>
+    <name>yarn.app.mapreduce.am.resource.mb</name>
+    <value>512</value>
+  </property>
+
+  <!-- Baja memoria de map y reduce -->
+  <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>512</value>
+  </property>
+
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>512</value>
+  </property>
+
+  <!-- Ajusta heap Java acorde -->
+  <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Xmx256m</value>
+  </property>
+
+  <!-- Importante: que los contenedores YARN encuentren MRAppMaster -->
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Xmx256m</value>
+  </property>
+
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+  </property>
+
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+  </property>
+
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+  </property>
+
+</configuration>
