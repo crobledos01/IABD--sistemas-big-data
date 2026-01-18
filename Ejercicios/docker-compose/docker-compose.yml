@@ -1,0 +1,59 @@
+services:
+  namenode:
+    image: apache/hadoop:3.4.1
+    container_name: namenode
+    hostname: namenode
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    volumes:
+      - ./config:/opt/hadoop/etc/hadoop
+      - ./namenode:/opt/hadoop/data/nameNode
+      - ./start-hdfs.sh:/start-hdfs.sh:ro
+    command: ["/bin/bash", "/start-hdfs.sh"]
+    ports:
+      - "9870:9870"   # Namenode
+      - "8088:8088"   # Yarn
+    networks:
+      - hdfsnetwork
+
+  datanode1:
+    image: apache/hadoop:3.4.1
+    container_name: datanode1
+    hostname: datanode1
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    volumes:
+      - ./config:/opt/hadoop/etc/hadoop
+      - ./datanode1:/opt/hadoop/data/dataNode
+      - ./init-datanode.sh:/init-datanode.sh:ro
+    command: ["/bin/bash", "/init-datanode.sh"]
+    depends_on:
+      - namenode
+    networks:
+      - hdfsnetwork
+
+  datanode2:
+    image: apache/hadoop:3.4.1
+    container_name: datanode2
+    hostname: datanode2
+    user: root
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    volumes:
+      - ./config:/opt/hadoop/etc/hadoop
+      - ./datanode2:/opt/hadoop/data/dataNode
+      - ./init-datanode.sh:/init-datanode.sh:ro
+    command: ["/bin/bash", "/init-datanode.sh"]
+    depends_on:
+      - namenode
+    networks:
+      - hdfsnetwork
+
+networks:
+  hdfsnetwork:
+    driver: bridge
