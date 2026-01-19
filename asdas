@@ -1,0 +1,8 @@
+{
+    "_id": 1,
+    "titulo": "El aleph",
+    "autor": "Borges",
+    "editorial": "Planeta",
+    "precio": 20,
+    "cantidad": 50
+  },
