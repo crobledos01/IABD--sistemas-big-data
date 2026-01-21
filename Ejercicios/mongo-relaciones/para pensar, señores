@@ -1,0 +1,7 @@
+Areas de la empresa: NOMBRE - UBICACION
+Personas que trabajan con ellas: NOMBRE - DNI - AREA A LA QUE PERTENECE (relación N - 1 con el AREA)
+Cursos de formación: ID - NOMBRE - PERSONAL QUE IMPARTE EL CURSO (realacion N - 1 con el PERSONAL)
+Personal para impartirlas: ID - NOMBRE - DNI
+
+Listar los cursos y quienes los imparten
+Listar formadores y sus cursos
