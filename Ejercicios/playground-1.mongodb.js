@@ -25,6 +25,23 @@ use("libreria");
 //         }
 //     }
 // ])
+
+// 3. Mostrar el título, el precio, la cantidad y el campo calculado valorStock, cuyo valor se
+// obtiene de la multiplicación entre precio y cantidad.
+// db.libros.aggregate([
+//     {
+//         $project: {
+//             _id: 0,
+//             titulo: 1,
+//             precio: 1,
+//             cantidad: 1,
+//             valorStock: {
+//                 $multiply: [ "$precio", "$cantidad" ]
+//             }
+//         }
+//     }
+// ])
+
 // 4. Calcular cuántos libros hay por editorial.
 // db.libros.aggregate([
 //     {
@@ -78,11 +95,86 @@ use("libreria");
 // agotado si la cantidad es 0,
 // pocas unidades si la cantidad es menor que 5,
 // disponible en cualquier otro caso.
-
+// db.libros.aggregate([
+//     {
+//         $project: {
+//             _id: 0,
+//             titulo: 1,
+//             cantidad: 1,
+//             estadoLibro: {
+//                 $switch: {
+//                     branches: [
+//                         {
+//                             case: {
+//                                 $eq: ["$cantidad", 0]
+//                             }, then: "agotado"
+//                         },
+//                         {
+//                             case: {
+//                                 $gte: ["$cantidad", 5]
+//                             }, then: "disponible"
+//                         }
+//                     ],
+//                     default: "pocas unidades"
+//                 }
+//             }
+//         }
+//     }
+// ])
 
 // 8. Para cada libro, clasificarlo como rentable o no rentable en función de si el valor del stock
 // (precio multiplicado por cantidad) es mayor o igual que 500.
-
+// db.libros.aggregate([
+//     {
+//         $project: {
+//             _id: 0,
+//             titulo: 1,
+//             rentabilidad: {
+//                 $cond: {
+//                     if: {
+//                         $gte: [{
+//                             $multiply: ["$cantidad", "$precio"]
+//                         }, 500]
+//                     },
+//                     then: "Rentable",
+//                     else: "No rentable"
+//                 }
+//             }
+//         }
+//     }
+// ])
 
 // 9. Contar cuántos libros hay de cada tipo de estadoLibro. (crea primero el campo con una
 // condición y después agrupa.)
+// db.libros.aggregate([
+//     {
+//         $project: {
+//             _id: 0,
+//             titulo: 1,
+//             cantidad: 1,
+//             estadoLibro: {
+//                 $switch: {
+//                     branches: [
+//                         {
+//                             case: {
+//                                 $eq: ["$cantidad", 0]
+//                             }, then: "agotado"
+//                         },
+//                         {
+//                             case: {
+//                                 $gte: ["$cantidad", 5]
+//                             }, then: "disponible"
+//                         }
+//                     ],
+//                     default: "pocas unidades"
+//                 }
+//             }
+//         }
+//     },
+//     {
+//         $group: {
+//             _id: "$estadoLibro",
+//             totalLibros: { $sum: 1 }
+//         }
+//     }
+// ])
