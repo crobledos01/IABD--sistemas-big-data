@@ -19,7 +19,7 @@ chown -R hadoop:hadoop "$DN_DIR" || true
 chmod 755 "$DN_DIR" || true
 
 echo "[$(hostname)] Arrancando YARN NodeManager..."
-yarn --daemon start nodemanager
+yarn --daemon start nodemanager &
 
 echo "[$(hostname)] Arrancando servicio DataNode (foreground)..."
 # Mantiene el contenedor vivo
