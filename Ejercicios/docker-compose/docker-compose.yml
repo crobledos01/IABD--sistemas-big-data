@@ -9,7 +9,7 @@ services:
       - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
     volumes:
       - ./conf:/opt/hadoop/etc/hadoop
-      - ./data/namenode:/opt/hadoop/data/nameNode
+      - namenode_data:/opt/hadoop/data/nameNode
       - ./scripts:/scripts
     entrypoint: ["/bin/bash", "/scripts/start-hdfs.sh"]
     ports:
@@ -21,11 +21,12 @@ services:
     image: apache/hadoop:3.4.1
     container_name: datanode1
     hostname: datanode1
+    user: root
     depends_on:
       - namenode
     volumes:
       - ./conf:/opt/hadoop/etc/hadoop
-      - ./data/dataNode:/opt/hadoop/data/dataNode
+      - datanode1_data:/opt/hadoop/data/dataNode
       - ./scripts:/scripts
     entrypoint: ["/bin/bash", "/scripts/init-datanode.sh"]
 
@@ -33,6 +34,7 @@ services:
     image: apache/hadoop:3.4.1
     container_name: datanode2
     hostname: datanode2
+    user: root
     depends_on:
       - namenode
     environment:
@@ -40,6 +42,11 @@ services:
       - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
     volumes:
       - ./conf:/opt/hadoop/etc/hadoop
-      - ./data/dataNode:/opt/hadoop/data/dataNode
+      - datanode2_data:/opt/hadoop/data/dataNode
       - ./scripts:/scripts
     entrypoint: ["/bin/bash", "/scripts/init-datanode.sh"]
+
+volumes:
+  namenode_data:
+  datanode1_data:
+  datanode2_data:
