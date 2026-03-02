@@ -1,0 +1,15 @@
+Tablas:
+AREAS_EMPRESA: NOMBRE - UBICACION
+PERSONAL_TRABAJADOR: NOMBRE - DNI - AREA A LA QUE PERTENECE (relación N - 1 con el AREA)
+CURSOS_FORMACION: ID - NOMBRE - PERSONAL QUE IMPARTE EL CURSO (realacion N - 1 con el PERSONAL)
+PERSONAL_INSTRUCTOR: ID - NOMBRE - DNI
+
+Relaciones:
+Cada área puede tener muchas personas trabajando en ella, por lo que AREAS_EMPRESA tendría una relación 1:N con el PERSONAL_TRABAJADOR
+Cada persona pertenece a una sola área, por lo que PERSONAL_TRABAJADOR tendría una relación N:1 con AREAS_EMPRESA
+Cada curso es impartido por un solo formador, por lo que el CURSOS_FORMACION tendría una relación N:1 con el PERSONAL_INSTRUCTOR
+Cada formador puede impartir varios cursos, por lo que el PERSONAL_INSTRUCTOR tendría una relación 1:N con el CURSOS_FORMACION
+
+Consultas que se pueden realizar:
+Listar los cursos y quienes los imparten
+Listar formadores y sus cursos
