@@ -1,0 +1,513 @@
+[
+  {
+    "nombre": "reineta",
+    "descripcion": "Manzana tradicional con aroma intenso. Textura firme y sabor equilibrado, ideal para reposteria y asados.",
+    "tipo": "acida",
+    "origen": "España",
+    "precio_kg": 2.49,
+    "stock_kg": 180,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "tradicional",
+      "reposteria",
+      "verde"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.4,
+      "vitamina_c_mg": 7.0
+    },
+    "popularidad": 78
+  },
+  {
+    "nombre": "fuji",
+    "descripcion": "Muy dulce y crujiente. Excelente para comer en fresco y ensaladas.",
+    "tipo": "dulce",
+    "origen": "Japón",
+    "precio_kg": 3.29,
+    "stock_kg": 120,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "premium",
+      "roja",
+      "crujiente"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.0,
+      "vitamina_c_mg": 5.5
+    },
+    "popularidad": 85
+  },
+  {
+    "nombre": "gala",
+    "descripcion": "Dulce suave con buena jugosidad. Muy usada en snacks y desayunos.",
+    "tipo": "dulce",
+    "origen": "Nueva Zelanda",
+    "precio_kg": 2.89,
+    "stock_kg": 210,
+    "temporada": [
+      "verano",
+      "otoño"
+    ],
+    "tags": [
+      "roja",
+      "jugosa",
+      "snack"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 6.2
+    },
+    "popularidad": 82
+  },
+  {
+    "nombre": "golden",
+    "descripcion": "Sabor dulce con toque aromatico. Buena para compotas y tartas.",
+    "tipo": "dulce",
+    "origen": "Francia",
+    "precio_kg": 2.19,
+    "stock_kg": 260,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "amarilla",
+      "compota",
+      "tarta"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.0,
+      "vitamina_c_mg": 4.8
+    },
+    "popularidad": 90
+  },
+  {
+    "nombre": "granny smith",
+    "descripcion": "Muy acida, verde y crujiente. Perfecta para ensaladas y combinaciones con queso.",
+    "tipo": "acida",
+    "origen": "Australia",
+    "precio_kg": 2.75,
+    "stock_kg": 190,
+    "temporada": [
+      "todo_el_año"
+    ],
+    "tags": [
+      "verde",
+      "crujiente",
+      "ensalada"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.6,
+      "vitamina_c_mg": 8.1
+    },
+    "popularidad": 88
+  },
+  {
+    "nombre": "pink lady",
+    "descripcion": "Equilibrio entre dulce y acida. Piel rosada, textura firme y aroma floral.",
+    "tipo": "equilibrada",
+    "origen": "España",
+    "precio_kg": 3.1,
+    "stock_kg": 140,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "rosada",
+      "firme",
+      "aromatica"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.3,
+      "vitamina_c_mg": 6.9
+    },
+    "popularidad": 84
+  },
+  {
+    "nombre": "royal gala",
+    "descripcion": "Variante de gala con mas aroma y dulzor. Ideal para comer a mordiscos.",
+    "tipo": "dulce",
+    "origen": "Chile",
+    "precio_kg": 2.95,
+    "stock_kg": 160,
+    "temporada": [
+      "verano",
+      "otoño"
+    ],
+    "tags": [
+      "roja",
+      "snack",
+      "aromatica"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.2,
+      "vitamina_c_mg": 6.0
+    },
+    "popularidad": 76
+  },
+  {
+    "nombre": "red delicious",
+    "descripcion": "Dulce y muy aromatica, piel roja intensa. Buena para comer en fresco.",
+    "tipo": "dulce",
+    "origen": "EEUU",
+    "precio_kg": 2.65,
+    "stock_kg": 130,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "roja",
+      "aromatica"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 5.1
+    },
+    "popularidad": 70
+  },
+  {
+    "nombre": "braeburn",
+    "descripcion": "Sabor complejo, ligeramente especiado. Buena para hornear y para zumos.",
+    "tipo": "equilibrada",
+    "origen": "Nueva Zelanda",
+    "precio_kg": 2.99,
+    "stock_kg": 150,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "especiada",
+      "horno",
+      "zumo"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.4,
+      "vitamina_c_mg": 6.4
+    },
+    "popularidad": 73
+  },
+  {
+    "nombre": "jonagold",
+    "descripcion": "Grande, jugosa y aromatica. Ideal para compotas y consumo diario.",
+    "tipo": "dulce",
+    "origen": "Bélgica",
+    "precio_kg": 2.58,
+    "stock_kg": 110,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "grande",
+      "jugosa",
+      "compota"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.2,
+      "vitamina_c_mg": 5.9
+    },
+    "popularidad": 69
+  },
+  {
+    "nombre": "ambrosia",
+    "descripcion": "Muy dulce, aroma a miel. Textura crujiente y piel bicolor.",
+    "tipo": "dulce",
+    "origen": "Canadá",
+    "precio_kg": 3.45,
+    "stock_kg": 80,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "miel",
+      "crujiente",
+      "premium"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.0,
+      "vitamina_c_mg": 5.0
+    },
+    "popularidad": 66
+  },
+  {
+    "nombre": "mcintosh",
+    "descripcion": "Pulpa tierna y jugosa. Muy buena para pure y compota.",
+    "tipo": "dulce",
+    "origen": "Canadá",
+    "precio_kg": 2.4,
+    "stock_kg": 95,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "tierna",
+      "pure",
+      "compota"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 5.6
+    },
+    "popularidad": 61
+  },
+  {
+    "nombre": "cortland",
+    "descripcion": "Blanca por dentro, no se oxida facilmente. Perfecta para ensaladas y tartas.",
+    "tipo": "equilibrada",
+    "origen": "EEUU",
+    "precio_kg": 2.72,
+    "stock_kg": 90,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "ensalada",
+      "tarta",
+      "no_oxida"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.3,
+      "vitamina_c_mg": 6.1
+    },
+    "popularidad": 58
+  },
+  {
+    "nombre": "honeycrisp",
+    "descripcion": "Extremadamente crujiente y jugosa. Sabor dulce con toque acido.",
+    "tipo": "equilibrada",
+    "origen": "EEUU",
+    "precio_kg": 3.8,
+    "stock_kg": 75,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "crujiente",
+      "jugosa",
+      "premium"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.5,
+      "vitamina_c_mg": 7.4
+    },
+    "popularidad": 86
+  },
+  {
+    "nombre": "elstar",
+    "descripcion": "Aroma intenso, buena acidez y dulzor. Va genial para hornear.",
+    "tipo": "equilibrada",
+    "origen": "Alemania",
+    "precio_kg": 2.77,
+    "stock_kg": 105,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "horno",
+      "aromatica"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.4,
+      "vitamina_c_mg": 6.7
+    },
+    "popularidad": 60
+  },
+  {
+    "nombre": "idared",
+    "descripcion": "Acida y firme. Mantiene bien la forma en el horno.",
+    "tipo": "acida",
+    "origen": "Polonia",
+    "precio_kg": 2.35,
+    "stock_kg": 170,
+    "temporada": [
+      "invierno"
+    ],
+    "tags": [
+      "horno",
+      "firme",
+      "verde_roja"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.6,
+      "vitamina_c_mg": 7.8
+    },
+    "popularidad": 55
+  },
+  {
+    "nombre": "mutsu",
+    "descripcion": "Grande, dulce y aromatica. Buena para comer en fresco.",
+    "tipo": "dulce",
+    "origen": "Japón",
+    "precio_kg": 3.15,
+    "stock_kg": 70,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "grande",
+      "aromatica"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 5.3
+    },
+    "popularidad": 52
+  },
+  {
+    "nombre": "opal",
+    "descripcion": "Amarilla, dulce y con buena resistencia al oxidado. Ideal para lunch.",
+    "tipo": "dulce",
+    "origen": "República Checa",
+    "precio_kg": 3.05,
+    "stock_kg": 85,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "amarilla",
+      "no_oxida",
+      "snack"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.2,
+      "vitamina_c_mg": 6.0
+    },
+    "popularidad": 59
+  },
+  {
+    "nombre": "smitten",
+    "descripcion": "Dulce con final acido. Textura firme y piel rojiza.",
+    "tipo": "equilibrada",
+    "origen": "Australia",
+    "precio_kg": 3.35,
+    "stock_kg": 60,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "firme",
+      "roja",
+      "premium"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.3,
+      "vitamina_c_mg": 6.5
+    },
+    "popularidad": 57
+  },
+  {
+    "nombre": "cripps pink",
+    "descripcion": "Variedad base de Pink Lady. Equilibrada, firme y aromatica.",
+    "tipo": "equilibrada",
+    "origen": "Sudáfrica",
+    "precio_kg": 3.05,
+    "stock_kg": 125,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "firme",
+      "rosada"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.3,
+      "vitamina_c_mg": 6.8
+    },
+    "popularidad": 63
+  },
+  {
+    "nombre": "starking",
+    "descripcion": "Roja y dulce, con pulpa consistente. Buena para consumo diario.",
+    "tipo": "dulce",
+    "origen": "España",
+    "precio_kg": 2.55,
+    "stock_kg": 200,
+    "temporada": [
+      "otoño"
+    ],
+    "tags": [
+      "roja",
+      "diaria"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 5.4
+    },
+    "popularidad": 64
+  },
+  {
+    "nombre": "kanzi",
+    "descripcion": "Crujiente, jugosa y con buen equilibrio dulce-acido. Muy valorada en degustaciones.",
+    "tipo": "equilibrada",
+    "origen": "Países Bajos",
+    "precio_kg": 3.6,
+    "stock_kg": 65,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "degustacion",
+      "crujiente",
+      "premium"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.4,
+      "vitamina_c_mg": 7.2
+    },
+    "popularidad": 79
+  },
+  {
+    "nombre": "envy",
+    "descripcion": "Dulce, crujiente y aroma delicado. Pardea lentamente al cortar.",
+    "tipo": "dulce",
+    "origen": "Nueva Zelanda",
+    "precio_kg": 3.95,
+    "stock_kg": 55,
+    "temporada": [
+      "otoño",
+      "invierno"
+    ],
+    "tags": [
+      "premium",
+      "crujiente",
+      "no_oxida"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.1,
+      "vitamina_c_mg": 6.3
+    },
+    "popularidad": 74
+  },
+  {
+    "nombre": "cosmic crisp",
+    "descripcion": "Muy crujiente y jugosa. Buena conservacion y sabor equilibrado.",
+    "tipo": "equilibrada",
+    "origen": "EEUU",
+    "precio_kg": 3.7,
+    "stock_kg": 50,
+    "temporada": [
+      "invierno"
+    ],
+    "tags": [
+      "conservacion",
+      "crujiente",
+      "premium"
+    ],
+    "nutrientes": {
+      "fibra_g": 2.5,
+      "vitamina_c_mg": 7.0
+    },
+    "popularidad": 68
+  }
+]
