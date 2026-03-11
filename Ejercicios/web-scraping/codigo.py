@@ -52,7 +52,13 @@ try:
               categorias.append(th.get_text(strip=True))
           continue
       for index, td in enumerate(td_list):
-          producto[categorias[index].lower()] = td.get_text(strip=True)
+          value = td.get_text(strip=True)
+          if value == "":
+            if index == 0:
+                value = "Desconocido"
+            else:
+               value = 0
+          producto[categorias[index].lower()] = value
       productos.append(producto)
   print("Lista de productos:")
   for producto in productos:
