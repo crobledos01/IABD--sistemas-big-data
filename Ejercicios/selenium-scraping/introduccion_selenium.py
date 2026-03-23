@@ -342,10 +342,24 @@ print("\n-------------------------------------\n")
 # ==========================================================
 
 for libro in libros_primera_pagina:
-    titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
     precio = float(libro.find_element(By.CLASS_NAME, "price_color").text.replace("£", ""))
-    disponibilidad = ""
-    categoria = ""
+    if precio > 50:
+        titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+        if libro.find_element(By.CLASS_NAME, "instock"):
+            disponibilidad = ""
+        else:
+            disponibilidad = "no "
+        categoria = ""
+        # Aquí hay que modificar para que clique en el enlace y no en el propio libro
+        libro.click()
+
+        breadcrumb = driver.find_elements(By.CSS_SELECTOR, "ul.breadcrumb li")
+
+        print(breadcrumb[2].text)
+
+        print(f"El primer libro que cuesta más de 50£ es \"{titulo}\" ({precio})", end="")
+        print(f", se encuentra {disponibilidad}disponible y pertenece a la categoría ")
+        break
 
 # ==========================================================
 # EJERCICIO 6
@@ -358,6 +372,10 @@ for libro in libros_primera_pagina:
 # - cuál es el libro más caro de esa categoría
 # ==========================================================
 
+print("\n\nANÁLISIS CATEGORÍA HUMOR:")
+# for categoria in categorias:
+#     if categoria.text == "Humor":
+#         #categoria.click()
 
 # ==========================================================
 # EJERCICIO 7
