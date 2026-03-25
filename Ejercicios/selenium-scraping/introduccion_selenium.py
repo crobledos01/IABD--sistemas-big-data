@@ -524,8 +524,18 @@ for index in range(7):
 
 lista_libros.sort(key=lambda libro: libro["precio"])
 
-print(lista_libros[0])
-print(lista_libros[-1])
+libro_mas_barato = lista_libros[0]
+libro_mas_caro = lista_libros[-1]
+
+print(f"El libro más barato es \"{libro_mas_barato["titulo"]}\", cuesta £{libro_mas_barato["precio"]} y tiene {libro_mas_barato["puntuacion"]} estrellas de valoración.\n")
+print(f"El libro más barato es \"{libro_mas_caro["titulo"]}\", cuesta £{libro_mas_caro["precio"]} y tiene {libro_mas_caro["puntuacion"]} estrellas de valoración.\n")
+
+if libro_mas_barato["puntuacion"] > libro_mas_caro["puntuacion"]:
+    print(f"El libro más barato tiene mejor puntuación que el libro más caro")
+elif libro_mas_barato["puntuacion"] < libro_mas_caro["puntuacion"]:
+    print(f"El libro más caro tiene mejor puntuación que el libro más barato")
+else:
+    print("Ambos libros tienen la misma valoración")
 
 for _ in range(7):
     driver.back()
