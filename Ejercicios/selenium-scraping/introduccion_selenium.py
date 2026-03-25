@@ -293,7 +293,6 @@ print("\n-------------------------------------\n")
 
 libros_primera_pagina = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
 
-print(len(libros_primera_pagina))
 mayor_precio = 0
 titulo_mayor_precio = ""
 for libro in libros_primera_pagina:
@@ -303,7 +302,7 @@ for libro in libros_primera_pagina:
         mayor_precio = precio
         titulo_mayor_precio = titulo
 
-print(f"El libro con mayor precio ({mayor_precio}) es {titulo_mayor_precio}")
+print(f"El libro con mayor precio (£{mayor_precio}) es {titulo_mayor_precio}")
 
 print("\n-------------------------------------\n")
 
@@ -344,22 +343,28 @@ print("\n-------------------------------------\n")
 for libro in libros_primera_pagina:
     precio = float(libro.find_element(By.CLASS_NAME, "price_color").text.replace("£", ""))
     if precio > 50:
-        titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+        enlace_titulo = libro.find_element(By.CSS_SELECTOR, "h3 a")
+        titulo = enlace_titulo.get_attribute("title")
         if libro.find_element(By.CLASS_NAME, "instock"):
             disponibilidad = ""
         else:
             disponibilidad = "no "
         categoria = ""
-        # Aquí hay que modificar para que clique en el enlace y no en el propio libro
-        libro.click()
+        
+        enlace_titulo.click()
 
         breadcrumb = driver.find_elements(By.CSS_SELECTOR, "ul.breadcrumb li")
+        if breadcrumb:
+            categoria = breadcrumb[2].text
 
-        print(breadcrumb[2].text)
+        print(f"El primer libro que cuesta más de £50 es \"{titulo}\" ({precio})", end="")
+        print(f", se encuentra {disponibilidad}disponible y pertenece a la categoría es {categoria}")
 
-        print(f"El primer libro que cuesta más de 50£ es \"{titulo}\" ({precio})", end="")
-        print(f", se encuentra {disponibilidad}disponible y pertenece a la categoría ")
+        driver.back()
+        
         break
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 6
@@ -372,10 +377,25 @@ for libro in libros_primera_pagina:
 # - cuál es el libro más caro de esa categoría
 # ==========================================================
 
-print("\n\nANÁLISIS CATEGORÍA HUMOR:")
-# for categoria in categorias:
-#     if categoria.text == "Humor":
-#         #categoria.click()
+for categoria in categorias:
+    nombre_categoria = categoria.text.split()[0]
+    if nombre_categoria == "Humor":
+        categoria.click()
+        libro_mas_caro = ""
+        precio_libro = 0
+        cantidad_categoria = driver.find_element(By.CSS_SELECTOR, "form.form-horizontal strong").text
+        libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+        for libro in libros:
+            precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+            if precio > precio_libro:
+                precio_libro = precio
+                libro_mas_caro = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+                
+        print(f"La categoría {nombre_categoria} tiene {cantidad_categoria} libros y el más caro es \"{libro_mas_caro}\"")
+        driver.back()
+        break
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 7
@@ -387,6 +407,35 @@ print("\n\nANÁLISIS CATEGORÍA HUMOR:")
 # - el precio medio de esos libros
 # ==========================================================
 
+for categoria in categorias:
+    nombre_categoria = categoria.text.split()[0]
+    if nombre_categoria == "Childrens":
+        categoria.click()
+        precio_libros = 0
+        cantidad_categoria = int(driver.find_element(By.CSS_SELECTOR, "form.form-horizontal strong").text)
+        siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+        numero_paginas = 0
+        while siguiente_pagina:
+            numero_paginas = numero_paginas + 1
+            libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+            for libro in libros:
+                precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+                precio_libros = precio_libros + precio
+            try:
+                siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+                siguiente_pagina.click()
+            except:
+                break
+                
+        precio_medio = round((precio_libros / cantidad_categoria), 2)
+        print(f"La categoría {nombre_categoria} tiene {cantidad_categoria} libros y el precio medio es £{precio_medio}")
+
+        for index in range(numero_paginas):
+            driver.back()
+
+        break
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 8
@@ -399,6 +448,27 @@ print("\n\nANÁLISIS CATEGORÍA HUMOR:")
 # - en qué página estaba
 # ==========================================================
 
+precio_mas_caro = 0
+libro_mas_caro = ""
+pagina_mas_caro = 0
+for index in range(3):
+    libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+    for libro in libros:
+        precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+        if precio > precio_libro:
+            precio_mas_caro = precio
+            libro_mas_caro = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+            pagina_mas_caro = index + 1
+    
+    siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+    siguiente_pagina.click()
+
+print(f"El libro más caro de las tres primeras páginas es \"{libro_mas_caro}\", cuesta £{precio_mas_caro} y está en la pagina {pagina_mas_caro}")
+
+for _ in range(3):
+    driver.back()
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 9
@@ -416,6 +486,53 @@ print("\n\nANÁLISIS CATEGORÍA HUMOR:")
 # - cuál de los dos tiene mejor valoración
 # ==========================================================
 
+def obtener_puntuacion(atributos):
+    puntuacion = [atributo for atributo in atributos if atributo != "star-rating"]
+    match puntuacion:
+        case 'One':
+            return 1
+        case 'Two':
+            return 2
+        case 'Three':
+            return 3
+        case 'Four':
+            return 4
+        case 'Five':
+            return 5
+        case _:
+            return 0
+
+lista_libros = []
+
+for index in range(7):
+    libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+    for libro in libros:
+        star_rating = libro.find_element(By.CSS_SELECTOR, "p.star-rating")
+        puntuacion = obtener_puntuacion(star_rating.get_attribute("class").split())
+        precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+        titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+        objeto_libro = {
+            "titulo": titulo,
+            "precio": precio,
+            "puntuacion": puntuacion
+        }
+        lista_libros.append(objeto_libro)
+
+    
+    siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+    siguiente_pagina.click()
+
+lista_libros.sort(key=lambda libro: libro["precio"])
+
+print(lista_libros[0])
+print(lista_libros[-1])
+
+for _ in range(7):
+    driver.back()
+
+driver.save_screenshot(f"{carpeta_capturas}/0{index}_inicio.png")
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 10
