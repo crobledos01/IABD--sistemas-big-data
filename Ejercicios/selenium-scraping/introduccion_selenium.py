@@ -488,7 +488,7 @@ print("\n-------------------------------------\n")
 
 def obtener_puntuacion(atributos):
     puntuacion = [atributo for atributo in atributos if atributo != "star-rating"]
-    match puntuacion:
+    match puntuacion[0]:
         case 'One':
             return 1
         case 'Two':
