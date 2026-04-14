@@ -567,24 +567,32 @@ print("\n-------------------------------------\n")
 # de todas sus páginas, no solo los de la primera.
 # ==========================================================
 
-for categoria in categorias:
-    nombre_categoria = categoria.text.split()[0]
-    if nombre_categoria == "Humor":
-        categoria.click()
-        libro_mas_caro = ""
-        precio_libro = 0
-        cantidad_categoria = driver.find_element(By.CSS_SELECTOR, "form.form-horizontal strong").text
-        libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
-        for libro in libros:
-            precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
-            if precio > precio_libro:
-                precio_libro = precio
-                libro_mas_caro = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
-                
-        print(f"La categoría {nombre_categoria} tiene {cantidad_categoria} libros y el más caro es \"{libro_mas_caro}\"")
-        driver.back()
-        break
+def buscar_categoria(categoria_buscada):
+    categorias = driver.find_elements(By.CSS_SELECTOR, "div.side_categories ul li ul li a")
+    for categoria in categorias:
+        nombre_categoria = categoria.text.split()[0]
+        lista_libros = []
+        if nombre_categoria == categoria_buscada:
+            categoria.click()
+            while True:
+                libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+                for libro in libros:
+                    precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+                    titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+                    lista_libros.append((titulo, precio))
+                try:
+                    siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+                    siguiente_pagina.click()
+                except:
+                    break
+            for _ in range(int(len(lista_libros) / 20) + 1):
+                driver.back()
+            return lista_libros
 
+
+lista_humor = buscar_categoria("Humor")
+print(lista_humor)
+driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
 # ==========================================================
 # EJERCICIO 11
 # CONTAR CUÁNTOS LIBROS HAY EN CADA CATEGORÍA
