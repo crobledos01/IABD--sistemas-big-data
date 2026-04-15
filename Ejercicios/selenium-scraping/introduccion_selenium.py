@@ -589,10 +589,30 @@ def buscar_categoria(categoria_buscada):
                 driver.back()
             return lista_libros
 
-
 lista_humor = buscar_categoria("Humor")
-print(lista_humor)
-driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
+lista_mystery = buscar_categoria("Mystery")
+
+print(f"La categoría Humor tiene {len(lista_humor)} libros y la categoría Mystery tiene {len(lista_mystery)} libros\n")
+
+libro_mas_caro_humor = max(lista_humor, key=lambda libro: libro[1])
+libro_mas_caro_mystery = max(lista_mystery, key=lambda libro: libro[1])
+
+if libro_mas_caro_humor[1] > libro_mas_caro_mystery[1]:
+    print(f"El libro más caro es \"{libro_mas_caro_humor[0]}\" (£{libro_mas_caro_humor[1]}) y pertenece a la categoría Humor\n")
+else:
+    print(f"El libro más caro es \"{libro_mas_caro_mystery[0]}\" (£{libro_mas_caro_mystery[1]}) y pertenece a la categoría Mystery\n")
+
+precio_medio_humor = sum(libro[1] for libro in lista_humor) / len(lista_humor)
+precio_medio_mystery = sum(libro[1] for libro in lista_mystery) / len(lista_mystery)
+
+if precio_medio_humor > precio_medio_mystery:
+    print(f"El precio medio más alto es el de la categoría Humor (£{precio_medio_humor})\n")
+else:
+    print(f"El precio medio más alto es el de la categoría Mystery (£{precio_medio_mystery})\n")
+    
+print("\n-------------------------------------\n")
+
+# driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
 # ==========================================================
 # EJERCICIO 11
 # CONTAR CUÁNTOS LIBROS HAY EN CADA CATEGORÍA
@@ -611,6 +631,21 @@ driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
 # de todas sus páginas, no solo los de la primera.
 # ==========================================================
 
+categorias = driver.find_elements(By.CSS_SELECTOR, "div.side_categories ul li ul li a")
+libros_categorias = []
+for categoria in categorias:
+    nombre_categoria = categoria.text
+    categoria.click()
+    cantidad_categoria = driver.find_element(By.CSS_SELECTOR, "form.form-horizontal strong").text
+    print(f"La categoría \"{nombre_categoria}\" tiene {cantidad_categoria} libros")
+    libros_categorias.append((nombre_categoria, int(cantidad_categoria)))
+    driver.back()
+
+categoria_mas_libros = max(libros_categorias, key=lambda categoria: categoria[1])
+
+print(f"\nLa categoría con más libros es {categoria_mas_libros[0]} con {categoria_mas_libros[1]} libros")
+
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 12
@@ -628,6 +663,38 @@ driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
 # Muestra el ranking resultante.
 # ==========================================================
 
+
+siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+lista_libros = []
+while siguiente_pagina:
+    libros = driver.find_elements(By.CSS_SELECTOR, "article.product_pod")
+    for libro in libros:
+        titulo = libro.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+        precio = float(libro.find_element(By.CSS_SELECTOR, "p.price_color").text.replace("£", ""))
+        rating = libro.find_element(By.CSS_SELECTOR, "p.star-rating").get_attribute("class").replace("star-rating ", "")
+        disponibilidad = libro.find_element(By.CSS_SELECTOR, "p.instock.availability").text.strip()
+        lista_libros.append({
+            "titulo": titulo,
+            "precio": precio,
+            "rating": rating,
+            "disponibilidad": disponibilidad == "In stock"
+        })
+
+    try:
+        siguiente_pagina = driver.find_element(By.CSS_SELECTOR, "li.next a")
+        siguiente_pagina.click()
+    except:
+        break
+
+libros_5_estrellas = [libro for libro in lista_libros if "Five" in libro["rating"]]
+libros_5_estrellas.sort(key=lambda libro: libro["precio"], reverse=True)
+
+print("LIBROS CON 5 ESTRELLAS ORDENADOS DE MAYOR A MENOR PRECIO:")
+for libro in libros_5_estrellas:
+    print(libro)
+
+print(f"\nHay un total de {len(libros_5_estrellas)} libros con 5 estrellas\n")
+print("\n-------------------------------------\n")
 
 # ==========================================================
 # EJERCICIO 13
@@ -647,6 +714,11 @@ driver.save_screenshot(f"{carpeta_capturas}/vuelta.png")
 #
 # Después muestra todos sus datos.
 # ==========================================================
+
+libros_5_estrellas_disponibles = [libro for libro in libros_5_estrellas if libro["disponibilidad"] and libro["precio"] < 20]
+
+print("El primer libro que cuesta menos de 20 libras, tiene 5 estrellas y está disponible es:")
+print(libros_5_estrellas_disponibles[0])
 
 driver.quit()
 
