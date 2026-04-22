@@ -1,9 +1,9 @@
 
 from confluent_kafka import Consumer, TopicPartition
 
-nombre_topic = 'testtopic'
+nombre_topic = 'pruebatopic'
 grupo_consumers = 'testgrupo'
-particion_ID = 2
+particion_ID = 0
 
 c = Consumer({'bootstrap.servers': 'localhost:9092', 'group.id': grupo_consumers, 'auto.offset.reset': 'earliest'})
 #c.subscribe([nombre_topic])

@@ -3,8 +3,8 @@ from confluent_kafka.admin import AdminClient, NewTopic
 admin_client = AdminClient({'bootstrap.servers': 'localhost:9092'})
 
 #Crear Topic con X particiones
-nombre_topic = 'testtopic'
-particiones = 3
+nombre_topic = 'pruebatopic'
+particiones = 1
 nuevotopic = NewTopic(topic=nombre_topic, num_partitions=particiones)
 result = admin_client.create_topics(new_topics=[nuevotopic])
 
